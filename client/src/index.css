@@ -1,0 +1,131 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body,
+html {
+  color: black;
+}
+
+/* Roles Component Styling */
+.roles-container {
+  width: 25rem;
+  min-height: 20rem;
+  background-color: white;
+  border-radius: 8px;
+  margin: 0 auto;
+  margin-top: 5rem;
+  padding: 5px 0px;
+}
+
+.role-input {
+  text-align: center;
+}
+
+.role-input > input {
+  border-radius: 4px;
+  border: 1px solid grey;
+  padding: 2px 0px 4px 6px;
+}
+
+.role-input button {
+  padding: 4px 20px;
+  border: none;
+  margin-left: 5px;
+  margin-bottom: 2px;
+  border-radius: 4px;
+  background-color: #1f8ef1;
+}
+
+.role-input button:hover {
+  background-color: lightgray;
+}
+
+.roles-display {
+  margin-top: 1rem;
+}
+
+.roles-display ul {
+  display: flex;
+  justify-content: space-between;
+}
+
+.roles-display ul li {
+  list-style: circle;
+  margin-left: 1rem;
+}
+
+.roles-display button {
+  margin-right: 0.5rem;
+  padding: 0px 15px;
+  border: none;
+  border-radius: 4px;
+  background-color: #1f8ef1;
+}
+
+.roles-display button:hover {
+  background-color: lightgray;
+}
+
+/* Permissions */
+
+.permissions-container {
+  width: 25rem;
+  min-height: 20rem;
+  background-color: white;
+  border-radius: 8px;
+  margin: 0 auto;
+  margin-top: 5rem;
+  padding: 5px 0px;
+}
+
+.permission-input {
+  text-align: center;
+}
+
+.permission-input > input {
+  border-radius: 4px;
+  border: 1px solid grey;
+  padding: 2px 0px 4px 6px;
+}
+
+.permission-input button {
+  padding: 4px 20px;
+  border: none;
+  margin-left: 5px;
+  margin-bottom: 2px;
+  border-radius: 4px;
+  background-color: #1f8ef1;
+}
+
+.permission-input button:hover {
+  background-color: lightgray;
+}
+
+.permissions-display {
+  margin-top: 1rem;
+}
+
+.permissions-display ul {
+  display: flex;
+  justify-content: space-between;
+}
+
+.permissions-display ul li {
+  list-style: circle;
+  margin-left: 1rem;
+}
+
+.permissions-display button {
+  margin-right: 0.5rem;
+  padding: 0px 15px;
+  border: none;
+  border-radius: 4px;
+  background-color: #1f8ef1;
+}
+
+.permissions-display button:hover {
+  background-color: lightgrpermissions;
+}
