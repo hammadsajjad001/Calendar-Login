@@ -17,7 +17,7 @@ html {
   gap: 2px;
   position: absolute;
   top: 30%;
-  left: 35%;
+  left: 37%;
 }
 
 .calendar-link {
@@ -70,7 +70,7 @@ html {
 .calendar-main {
   width: 72vw;
   background-color: #27293d;
-  margin: 50px 0px 50px 20%;
+  margin: 80px 0px 50px 20%;
   border-radius: 8px;
 }
 

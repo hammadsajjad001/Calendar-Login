@@ -71,15 +71,21 @@ html {
 
 /* Permissions */
 
-.permissions-container {
-  width: 25rem;
-  min-height: 20rem;
-  background-color: white;
+/* .permissions-main {
+  width: 45rem;
+  min-height:20rem;
+  background-color: #27293d;
+  color: lightgrey;
   border-radius: 8px;
   margin: 0 auto;
   margin-top: 5rem;
-  padding: 5px 0px;
+  padding: 20px;
 }
+
+.permission-allContent{
+  display: flex;
+}
+
 
 .permission-input {
   text-align: center;
@@ -110,12 +116,9 @@ html {
 
 .permissions-display ul {
   display: flex;
-  justify-content: space-between;
 }
 
 .permissions-display ul li {
-  list-style: circle;
-  margin-left: 1rem;
 }
 
 .permissions-display button {
@@ -128,4 +131,100 @@ html {
 
 .permissions-display button:hover {
   background-color: lightgrpermissions;
+} */
+
+/* Sidebar */
+
+#mySidenav {
+  position: absolute;
+  left: -80px;
+  transition: 0.3s;
+  padding: 15px;
+  width: 150px;
+  height: 80vh;
+  text-decoration: none;
+  font-size: 20px;
+  color: white;
+  border-radius: 0 5px 5px 0;
+  background-color: #1f8ef1;
 }
+
+#mySidenav:hover {
+  left: 0;
+  width: 200px;
+}
+
+#mySidenav ul li h5{
+  color: white;
+}
+
+#mySidenav ul li h5{
+  display: none;
+}
+
+#mySidenav:hover ul li h5{
+  display: block;
+}
+
+.error-div{
+  width: 180px;
+  padding: 5px 5px 6px 5px;
+  position: absolute;
+  top: 47%;
+  left: 39%;
+}
+
+
+
+
+/* asdasd */
+
+.permissions-main {
+  padding: 20px;
+}
+
+.permissions-container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.permission-input {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.permission-input input {
+  margin-right: 10px;
+  padding: 5px;
+}
+
+.permission-input button {
+  padding: 5px 10px;
+}
+
+.permission-allContent {
+  margin-top: 20px;
+}
+
+.grid-container {
+  display: flex;
+  flex-direction: column; 
+}
+
+.grid-header {
+  background-color: white;
+  display: flex;
+  align-items: center; 
+  font-weight: bold;
+  border-bottom: 2px solid #ccc;
+  padding: 10px;
+}
+
+
+.grid-item {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #ccc;
+}
+

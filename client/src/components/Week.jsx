@@ -101,7 +101,6 @@ const Week = () => {
     setPopup(true);
   };
   const handleDeleteClick = (eventId) => {
-
     deleteEvent(eventId);
   };
 

@@ -1,11 +1,16 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPencil } from '@fortawesome/free-solid-svg-icons'
+import { faTrashCan } from '@fortawesome/free-solid-svg-icons'
+import { faPlus } from '@fortawesome/free-solid-svg-icons'
 
-export default function Permissions () {
+export default function Permissions() {
   const [permission, setPermission] = useState('')
   const [permissions, setPermissions] = useState([])
   const [isEditing, setIsEditing] = useState(false)
   const [editIndex, setEditIndex] = useState(null)
+  const [users, setUsers] = useState([])
 
   useEffect(() => {
     axios
@@ -15,6 +20,14 @@ export default function Permissions () {
         setPermissions(response.data)
       })
       .catch(error => console.error('Error fetching permissions:', error))
+
+    axios
+      .get('http://localhost:3001/users')
+      .then(response => {
+        console.log('Fetched users:', response.data)
+        setUsers(response.data)
+      })
+      .catch(error => console.error('Error fetching users:', error))
   }, [])
 
   const handleAddPermission = () => {
@@ -66,42 +79,52 @@ export default function Permissions () {
   }
 
   return (
-    <div className='permissions-container'>
-      <h3 style={{ textAlign: 'center', paddingTop: '5px' }}>
-        Permissions Management
-      </h3>
-      <div className='permission-input'>
-        <input
-          type='text'
-          placeholder='Add a permission'
-          required
-          value={permission}
-          onChange={e => {
-            setPermission(e.target.value)
-          }}
-        />
-        <button onClick={handleAddPermission}>
-          {isEditing ? 'Update' : 'Add'}
-        </button>
-      </div>
-      <div className='permissions-display'>
-        {permissions.length > 0 ? (
-          permissions.map((item, index) => (
-            <ul key={item._id}>
-              <li>{item.name}</li>
-              <div>
-                <button onClick={() => handleEditPermission(index)}>
-                  Edit
-                </button>
-                <button onClick={() => handleDeletePermission(index)}>
-                  Delete
-                </button>
-              </div>
-            </ul>
-          ))
-        ) : (
-          <p>No permissions available</p>
-        )}
+    <div className='permissions-main'>
+      <div className='permissions-container'>
+        <h3 style={{ textAlign: 'center', paddingTop: '5px' }}>
+          Permissions Management
+        </h3>
+        <div className='permission-input'>
+          <input
+            type='text'
+            placeholder='Add a permission'
+            required
+            value={permission}
+            onChange={e => {
+              setPermission(e.target.value)
+            }}
+          />
+          <button onClick={handleAddPermission}>
+            {isEditing ? 'Update' : 'Add'}
+          </button>
+        </div>
+        <div className='permission-allContent'>
+          <div className='grid-container'>
+            <div className='grid-header'>
+              <div className='grid-item header-item'>User Name</div>
+              <div className='grid-item header-item'>Permissions</div>
+            </div>
+            {users.length > 0 ? (
+              users.map((user, index) => {
+                const userPermissions = permissions.filter(permission => permission.userId === user._id);
+                return (
+                  <div className='grid-item' key={index}>
+                    <div className='user-name'>{user.name}</div>
+                    <div className='user-permissions'>
+                      {userPermissions.length > 0 ? (
+                        userPermissions.map((perm, idx) => <div key={idx}><ul><li>{perm.name}</li></ul></div>)
+                      ) : (
+                        <div>No permissions</div>
+                      )}
+                    </div>
+                  </div>
+                )
+              })
+            ) : (
+              <p>No users available</p>
+            )}
+          </div>
+        </div>
       </div>
     </div>
   )
