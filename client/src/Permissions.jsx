@@ -79,53 +79,88 @@ export default function Permissions() {
   }
 
   return (
-    <div className='permissions-main'>
-      <div className='permissions-container'>
-        <h3 style={{ textAlign: 'center', paddingTop: '5px' }}>
-          Permissions Management
-        </h3>
-        <div className='permission-input'>
-          <input
-            type='text'
-            placeholder='Add a permission'
-            required
-            value={permission}
-            onChange={e => {
-              setPermission(e.target.value)
-            }}
-          />
-          <button onClick={handleAddPermission}>
-            {isEditing ? 'Update' : 'Add'}
-          </button>
-        </div>
-        <div className='permission-allContent'>
-          <div className='grid-container'>
-            <div className='grid-header'>
-              <div className='grid-item header-item'>User Name</div>
-              <div className='grid-item header-item'>Permissions</div>
-            </div>
-            {users.length > 0 ? (
-              users.map((user, index) => {
-                const userPermissions = permissions.filter(permission => permission.userId === user._id);
-                return (
-                  <div className='grid-item' key={index}>
-                    <div className='user-name'>{user.name}</div>
-                    <div className='user-permissions'>
-                      {userPermissions.length > 0 ? (
-                        userPermissions.map((perm, idx) => <div key={idx}><ul><li>{perm.name}</li></ul></div>)
-                      ) : (
-                        <div>No permissions</div>
-                      )}
+    <div className="permissions-main">
+    <div className="container permissions-container">
+      <div className="row permissions-header">
+        <div className="col-sm-3">Name</div>
+        <div className="col-sm-5">Permissions</div>
+        <div className="col-sm-2">Add Permission</div>
+      </div>
+      {Array.isArray(users) && users.length > 0 ? (
+        users.map((user) => (
+          <div className="row permission-content-display" key={user._id}>
+            <div className="col-sm-3 p-3 ">{user.name}</div>
+            <div className="col-sm-5 p-3 permission-list-div">
+              {Array.isArray(user.permissions) &&
+                user.permissions.map((permission, index) => (
+                  <div key={index} className="permission-list">
+                    <div className="permission-list-item">{permission}</div>
+                    <div className="edit-delete-permission">
+                      <FontAwesomeIcon
+                        icon={faPen}
+                        className="editPermission-icon"
+                        onClick={() => handleEditPermission(user, permission)}
+                        style={{ marginLeft: "10px", cursor: "pointer" }}
+                      />
+                      <FontAwesomeIcon
+                        icon={faTrash}
+                        className="deletePermission-icon"
+                        onClick={() => handleDeletePermission(user, permission)}
+                        style={{ marginLeft: "10px", cursor: "pointer" }}
+                      />
                     </div>
                   </div>
-                )
-              })
-            ) : (
-              <p>No users available</p>
-            )}
+                ))}
+            </div>
+            <div className="col-sm-1">
+              <FontAwesomeIcon
+                icon={faPlus}
+                className="addPermission-icon"
+                onClick={() => handleAddPermission(user)}
+              />
+            </div>
+          </div>
+        ))
+      ) : (
+        <p>No users found</p>
+      )}
+    </div>
+    {isModalActive && (
+      <div className="modal-permission">
+        <div className="modal-header">
+          <h5 className="modal-heading">
+            {editMode ? "Edit Permission" : "Add A Permission"}
+          </h5>
+          <FontAwesomeIcon
+            icon={faXmark}
+            className="permission-modal-close"
+            onClick={handleModalClose}
+          />
+        </div>
+        <div className="modal-content">
+          <div className="user-permission">
+            <h5>Name:</h5>
+            <h5 style={{ marginLeft: "4rem" }}>
+              {selectedUser ? selectedUser.name : ""}
+            </h5>
+          </div>
+          <div className="modal-container">
+            <h5>{editMode ? "New Permission :" : "Permission :"}</h5>
+            <input
+              type="text"
+              value={permission}
+              onChange={(e) => setPermission(e.target.value)}
+            ></input>
           </div>
         </div>
+        <div className="modal-save-permission">
+          <button onClick={handleSavePermission}>
+            {editMode ? "Save Changes" : "Save"}
+          </button>
+        </div>
       </div>
-    </div>
+    )}
+  </div>
+  
   )
 }
