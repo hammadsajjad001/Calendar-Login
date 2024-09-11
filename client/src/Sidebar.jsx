@@ -9,6 +9,9 @@ import { IoExtensionPuzzleOutline } from "react-icons/io5";
 import { BsPinAngle, BsAlarm } from "react-icons/bs";
 import { VscTools } from "react-icons/vsc";
 import { HiOutlineChartBar } from "react-icons/hi2";
+import { LuUser } from "react-icons/lu";
+import { IoAccessibilityOutline } from "react-icons/io5";
+import { SiPolywork } from "react-icons/si";
 
 import "./sideBar.css";
 
@@ -20,6 +23,7 @@ const SideBarComponent = () => {
   };
 
   return (
+    <div className="sidebar-main">
     <div className="sidebar">
       <div className="sidebar-header">
         <FaReact className="react-icon" />
@@ -27,12 +31,14 @@ const SideBarComponent = () => {
       </div>
       <ul className="dropdown-ul">
         <li>
-          <HiOutlineChartPie />
-          <span>Dashboard</span>
+          <HiOutlineChartPie className="sidebar-icon" />
+            <Link to="/home">
+            <span className="notdropdown">Dashboard</span>
+          </Link>
         </li>
         {/* Pages */}
         <li onClick={() => handleToggle(1)}>
-          <PiImagesLight />
+          <PiImagesLight className="sidebar-icon"/>
           <span>Pages</span>
           {activeDropdown === 1 ? (
             <FaCaretUp className="caret" />
@@ -65,7 +71,7 @@ const SideBarComponent = () => {
         </li>
         {/* Components */}
         <li onClick={() => handleToggle(2)}>
-          <TbHexagons />
+          <TbHexagons className="sidebar-icon"/>
           <span>Components</span>
           {activeDropdown === 2 ? (
             <FaCaretUp className="caret" />
@@ -101,7 +107,7 @@ const SideBarComponent = () => {
         </li>
         {/* Forms */}
         <li onClick={() => handleToggle(3)}>
-          <SiGoogleforms />
+          <SiGoogleforms className="sidebar-icon"/>
           <span>Forms</span>
           {activeDropdown === 3 ? (
             <FaCaretUp className="caret" />
@@ -125,7 +131,7 @@ const SideBarComponent = () => {
         </li>
         {/* Tables */}
         <li onClick={() => handleToggle(4)}>
-          <IoExtensionPuzzleOutline />
+          <IoExtensionPuzzleOutline className="sidebar-icon"/>
           <span>Tables</span>
           {activeDropdown === 4 ? (
             <FaCaretUp className="caret" />
@@ -146,7 +152,7 @@ const SideBarComponent = () => {
         </li>
         {/* Maps */}
         <li onClick={() => handleToggle(5)}>
-          <BsPinAngle />
+          <BsPinAngle className="sidebar-icon"/>
           <span>Maps</span>
           {activeDropdown === 5 ? (
             <FaCaretUp className="caret" />
@@ -166,33 +172,44 @@ const SideBarComponent = () => {
           </ul>
         </li>
         <li>
+          <VscTools className="sidebar-icon"/>
+
           <Link to="/widgets">
-            <VscTools />
-            Widgets
+            <span className="notdropdown">WIDGETS</span>
           </Link>
         </li>
         <li>
+          <HiOutlineChartBar className="sidebar-icon"/>
           <Link to="/charts">
-            <HiOutlineChartBar />
-            CHARTS
+            <span className="notdropdown">CHARTS</span>
           </Link>
         </li>
         <li>
+          <BsAlarm className="sidebar-icon"/>
           <Link to="/calendar">
-            <BsAlarm />
-            Calendar
+            <span className="notdropdown">CALENDAR</span>
           </Link>
         </li>
         <li>
-          <Link to="/roles">Roles</Link>
+          <SiPolywork className="sidebar-icon"/>
+          <Link to="/roles">
+            <span className="notdropdown">ROLES</span>
+          </Link>
         </li>
         <li>
-          <Link to="/permissions">Permissions</Link>
+          <IoAccessibilityOutline className="sidebar-icon"/>
+          <Link to="/permissions">
+            <span className="notdropdown">PERMISSIONS</span>
+          </Link>
         </li>
         <li>
-          <Link to="/usertab">Users</Link>
+          <LuUser className="sidebar-icon"/>
+          <Link to="/usertab">
+            <span className="notdropdown">USERS</span>
+          </Link>
         </li>
       </ul>
+    </div>
     </div>
   );
 };

@@ -12,14 +12,12 @@ function Logout() {
   return (
     <button
       style={{
-        padding: "8px 15px",
+        padding: "3px 23px",
         textDecoration: "none",
         backgroundColor: "#1f8ef1",
         color: "white",
         borderRadius: "4px",
-        position: "absolute",
-        right: "5%",
-        top: "3%",
+        border:"none"
       }}
       onClick={handleLogout}
     >

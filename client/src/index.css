@@ -1,14 +1,17 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600&display=swap");
 * {
-  padding: 0;
   margin: 0;
+  padding: 0;
   box-sizing: border-box;
 }
 
-body,
-html {
-  color: black;
+html,
+body {
+  font-family: "Poppins", sans-serif;
+  color: white;
+  font-size: 16px;
+  background-color: #1c1c2a;
 }
-
 ::-webkit-scrollbar {
   width: 5px;
   height: 10px;
@@ -18,44 +21,45 @@ html {
   background: rgb(141, 139, 139);
 }
 
+.dashboard {
+  overflow-x: hidden;
+}
+
+.components-section {
+  width: 88vw;
+  height: auto;
+  margin-left: 8.6rem;
+}
+
+.task-list-table-flex {
+  display: flex;
+  gap: 30px;
+}
+
+@media (max-width: 768px) {
+  .components-section {
+    width: 100vw;
+    margin: 10px 17px;
+    overflow-x: hidden;
+  }
+
+  .task-list-table-flex {
+    display: block;
+  }
+}
+
+@media (max-width: 508px) {
+  .components-section {
+    margin: 0;
+    margin-left: 15px;
+  }
+}
+
 .loggedUser {
   width: 20rem;
   margin: 0 auto;
   background-color: #1f8ef1;
   border-radius: 4px;
-}
-
-/* Sidebar */
-
-/* #mySidenav {
-  position: absolute;
-  left: -80px;
-  transition: 0.3s;
-  padding: 15px;
-  width: 150px;
-  height: 80vh;
-  text-decoration: none;
-  font-size: 20px;
-  color: white;
-  border-radius: 0 5px 5px 0;
-  background-color: #1f8ef1;
-}
-
-#mySidenav:hover {
-  left: 0;
-  width: 200px;
-} */
-
-#mySidenav ul li h5 {
-  color: white;
-}
-
-#mySidenav ul li h5 {
-  display: none;
-}
-
-#mySidenav:hover ul li h5 {
-  display: block;
 }
 
 .error-div {
@@ -71,15 +75,15 @@ html {
   width: 70vw;
   min-height: 50vh;
   background-color: #27293d;
-  margin: 0 auto;
-  margin-top: 8rem;
+  margin-left: 16rem;
+  margin-top: 1.7rem;
   color: lightgray;
   border-radius: 8px;
 }
 
 .roles-header {
   padding: 15px 0px;
-  padding-left: 1.2rem;
+  padding-left: 1.1rem;
   font-size: 18px;
   font-weight: 600;
   transform: scaleY(0.95);
@@ -101,10 +105,18 @@ html {
   margin-top: 3px;
 }
 
+.role-content-display .role-list:hover .edit-delete-role {
+  display: block;
+}
+
 .addRole-icon {
   font-size: 20px;
   padding: 15px 40px;
   cursor: pointer;
+}
+
+.edit-delete-role {
+  display: none;
 }
 
 /* Role's Modal */
@@ -161,6 +173,7 @@ html {
   width: 390px;
   padding: 6px 10px;
   border-radius: 6px;
+  margin-left: 1rem;
 }
 
 .modal-role .modal-container input:focus {
@@ -188,8 +201,8 @@ html {
   width: 70vw;
   min-height: 50vh;
   background-color: #27293d;
-  margin: 0 auto;
-  margin-top: 8rem;
+  margin-left: 16rem;
+  margin-top: 1.5rem;
   color: lightgray;
   border-radius: 8px;
 }
@@ -209,13 +222,17 @@ html {
 }
 
 .permission-content-display .permission-list {
-  width: 10rem;
+  width: 15rem;
   display: flex;
   justify-content: space-between;
   border-radius: 4px;
   background-color: #1f8ef1;
   padding: 3px 10px;
   margin-top: 3px;
+}
+
+.permission-content-display .permission-list:hover .edit-delete-permission {
+  display: block;
 }
 
 .permission-content-display .permission-list .permission-list-item {
@@ -229,9 +246,13 @@ html {
   cursor: pointer;
 }
 
+.edit-delete-permission {
+  display: none;
+}
+
 /* Permission's Modal */
 .modal-permission {
-  width: 35rem;
+  width: 36rem;
   height: auto;
   background-color: #1e1e2c;
   border-radius: 8px;
@@ -311,7 +332,7 @@ html {
   min-height: 50vh;
   background-color: #27293d;
   margin: 0 auto;
-  margin-top: 8rem;
+  margin-top: 1.6rem;
   color: lightgray;
   border-radius: 8px;
 }

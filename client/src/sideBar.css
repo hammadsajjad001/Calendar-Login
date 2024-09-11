@@ -22,22 +22,22 @@
   overflow-x: hidden;
 } */
 
-
 /* SIDE-BAR Styling  */
-
 .sidebar {
+  top: 13.3%;
   position: absolute;
-  left: -80px;
-  transition: 0.3s;
+  transition: 0.5s;
   padding: 15px;
-  width: 150px;
+  width: 80px;
   height: 80vh;
   text-decoration: none;
   font-size: 20px;
   color: white;
   border-radius: 0 5px 5px 0;
   background-color: #1f8ef1;
-  overflow-y: hidden;
+  overflow: hidden;
+  margin-left: 20px;
+  z-index: 1;
 }
 
 .sidebar:hover {
@@ -60,31 +60,72 @@
   padding: 5px;
 }
 
+/* hide content */
+.sidebar:not(:hover) .sidebar-header h5 {
+  display: none;
+}
+
+.sidebar:not(:hover) .sidebar-header .react-icon {
+  margin-left: 9px;
+}
+
+.sidebar:not(:hover) .dropdown-ul li span {
+  display: none;
+}
+
+.sidebar:hover .dropdown-ul li span {
+  display: inline;
+}
+
+.sidebar:not(:hover) .dropdown-ul .caret {
+  display: none;
+}
+
+.sidebar:not(:hover) .dropdown-ul li .sidebar-icon {
+  text-align: center;
+  margin-left: 2px;
+}
+
 .dropdown-ul {
   list-style-type: none;
   padding: 0;
   margin: 0;
+  margin-top: 2rem;
 }
 
 .dropdown-ul li {
-  padding: 10px;
+  padding: 20px 10px;
   align-items: center;
   cursor: pointer;
   position: relative;
+  font-size: 12px;
 }
 
+.sidebar .dropdown-ul li .sidebar-icon {
+  font-size: 1.5rem;
+}
+
+.dropdown-ul li a {
+  color: white;
+  padding: 10px;
+  align-items: center;
+  text-decoration: none;
+}
+
+.dropdown-ul li .notdropdown {
+  margin: 0;
+}
 .dropdown-ul li span {
-  margin-left: 10px;  
+  margin-left: 10px;
 }
 
 .caret {
   font-size: 14px;
   position: absolute;
-  top: 15px;
+  top: 26px;
   right: 0px;
   transition: transform 0.3s;
 }
-
 
 .dropdown {
   list-style-type: none;
@@ -95,9 +136,13 @@
 
 .dropdown.active {
   display: block;
+  padding-left: 10px;
 }
 
 .dropdown li {
-  padding-left: 0px;
   font-size: 14px;
+}
+
+.sidebar:not(:hover) .dropdown li{
+  display: none;
 }

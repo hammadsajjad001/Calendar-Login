@@ -198,7 +198,7 @@ export default function Roles() {
             <div className="user-role">
               {" "}
               <h5>Name:</h5>
-              <h5 style={{ marginLeft: "4rem" }}>
+              <h5 style={{ marginLeft: "1rem" }}>
                 {selectedUser ? selectedUser.name : ""}
               </h5>
             </div>

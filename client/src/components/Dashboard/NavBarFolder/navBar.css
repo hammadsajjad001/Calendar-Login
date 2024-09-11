@@ -1,0 +1,162 @@
+/* NAVBAR STYLING */
+.navbar-main {
+  width: 100%;
+  height: 60px;
+  position: relative;
+  z-index: 1;
+}
+
+.nav-bar-content-container {
+  display: flex;
+  justify-content: space-between;
+}
+.nav-header-left {
+  margin: 18px 0px 0px 7rem;
+  display: flex;
+  gap: 20px;
+  margin: 18px 0px 0px 3rem;
+  cursor: pointer;
+}
+
+.nav-sidebar-icon {
+  font-size: 24px;
+  position: absolute;
+  top: 3%;
+  left: 4%;
+}
+
+.dashboard-heading {
+  font-size: 18px;
+  font-weight: 400;
+  padding-top: 5px;
+  margin-left: 6rem;
+}
+
+/* NAV_HEADER_RIGHT */
+
+.nav-header-right {
+  display: flex;
+  margin: 19px 3.1rem 0px 0px;
+  cursor: pointer;
+  position: relative;
+}
+
+.nav-header-right i {
+  font-size: 19px;
+  padding-left: 2.5rem;
+}
+
+.navbar-main .activity-dropdown {
+  position: absolute;
+  right: 9%;
+  width: 17rem;
+  height: 14rem;
+  background-color: white;
+  border-radius: 4px;
+  padding: 5px 0px;
+}
+
+.activity-dropdown li {
+  font-size: 14px;
+  padding: 10px 10px;
+  color: lightgray;
+}
+
+.nav-profile-pic {
+  width: 35px;
+  height: 33px;
+  border-radius: 50%;
+  position: absolute;
+  right: 11%;
+}
+
+.navbar-main .profile-dropdown {
+  width: 9rem;
+  height: 5.5rem;
+  background-color: white;
+  position: absolute;
+  right: 3.5%;
+  border-radius: 4px;
+  text-align: center;
+  padding: 10px;
+}
+
+.nav-caret-down {
+  margin-left: 25px;
+}
+
+/* Search container styling */
+.search-container {
+  animation: myAnim 0.6s ease 0s 1 normal forwards;
+}
+@keyframes myAnim {
+  0% {
+    opacity: 0;
+    transform: translateY(-250px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.search-bar {
+  position: absolute;
+  left: 25%;
+}
+.search-container {
+  z-index: 99;
+  transform: translateX(-50%);
+  transition: top 0.5s ease-in-out;
+}
+.search-bar {
+  position: absolute;
+  left: 25%;
+  width: 650px;
+  padding: 35px;
+  border-radius: 7px;
+  border: none;
+  color: grey;
+  font-weight: 300;
+}
+
+.search-close-icon {
+  position: absolute;
+  left: 69%;
+  top: 100%;
+  margin-top: 25px;
+  color: grey;
+  font-size: 27px;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .dashboard-heading {
+    margin-left: 35px;
+  }
+  .nav-header-right {
+    margin-right: 1.3rem;
+  }
+  .search-bar {
+    width: 646px;
+    left: 3%;
+  }
+  .search-close-icon {
+    left: 85%;
+    padding-top: 30px;
+  }
+}
+
+@media (max-width: 508px) {
+  .dashboard-heading {
+    margin-left: 30px;
+    padding: 0;
+  }
+  .search-bar {
+    width: 477px;
+    left: 3%;
+  }
+  .search-close-icon {
+    padding-top: 28px;
+  }
+}
