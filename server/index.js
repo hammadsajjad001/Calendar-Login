@@ -2,12 +2,15 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const EmployeeModel = require("./models/Employee");
-const RolesModel = require("./models/rolesCollection");
-const PermissionsModel = require("./models/PermissionsCollections");
 
 const app = express();
 app.use(express.json());
 app.use(cors());
+app.use(
+  cors({
+    methods: ["GET", "POST", "PUT", "DELETE"],
+  })
+);
 
 mongoose
   .connect("mongodb://localhost:27017/employee", {
@@ -21,7 +24,7 @@ mongoose
     console.error("MongoDB connection error:", err);
   });
 
-app.post("/s ignup", async (req, res) => {
+app.post("/signup", async (req, res) => {
   const { name, email, password } = req.body;
   try {
     // Check if the email already exists
@@ -45,7 +48,7 @@ app.post("/", async (req, res) => {
   await EmployeeModel.findOne({ email: email }).then((user) => {
     if (user) {
       if (user.password === password) {
-        res.json("success");
+        res.json({ status: "success", name: user.name });
       } else {
         res.json("The password is incorrect.");
       }
@@ -55,70 +58,171 @@ app.post("/", async (req, res) => {
   });
 });
 
-app.get("/roles", async (req, res) => {
-  await RolesModel.find()
-    .then((roles) => res.json(roles))
-    .catch((err) => res.status(500).json(err));
-});
+// Add a new role to a user
+app.post("/addRole", async (req, res) => {
+  const { userId, role } = req.body;
 
-app.post("/roles", async (req, res) => {
-  await RolesModel.create(req.body)
-    .then((role) => res.json(role))
-    .catch((err) => res.status(500).json(err));
-});
+  if (!userId || !role) {
+    return res.status(400).json({ message: "User ID and role are required" });
+  }
 
-app.put("/roles/:id", async (req, res) => {
-  await RolesModel.findByIdAndUpdate(req.params.id, req.body, { new: true })
-    .then((role) => res.json(role))
-    .catch((err) => res.status(500).json(err));
-});
-
-app.delete("/roles/:id", async (req, res) => {
-  await RolesModel.findByIdAndDelete(req.params.id)
-    .then(() => res.json({ message: "Role deleted successfully" }))
-    .catch((err) => res.status(500).json(err));
-});
-
-// Permissions
-
-app.get("/permissions", async (req, res) => {
-  await PermissionsModel.find()
-    .then((permissions) => res.json(permissions))
-    .catch((err) => res.status(500).json(err));
-});
-
-app.post("/permissions", async (req, res) => {
-  await PermissionsModel.create(req.body)
-    .then((permission) => res.json(permission))
-    .catch((err) => res.status(500).json(err));
-});
-
-app.put("/permissions/:id", async (req, res) => {
-  await PermissionsModel.findByIdAndUpdate(req.params.id, req.body, {
-    new: true,
-  })
-    .then((permission) => res.json(permission))
-    .catch((err) => res.status(500).json(err));
-});
-
-app.delete("/permissions/:id", async (req, res) => {
-  await PermissionsModel.findByIdAndDelete(req.params.id)
-    .then(() => res.json({ message: "Permission deleted successfully" }))
-    .catch((err) => res.status(500).json(err));
-});
-
-// Get users For permission
-
-// Get users
-app.get('/users', async (req, res) => {
   try {
-    const users = await EmployeeModel.find().select('name');
-    res.json(users);
+    const user = await EmployeeModel.findById(userId);
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    // Ensure roles is initialized as an array
+    if (!user.roles) {
+      user.roles = [];
+    }
+
+    if (user.roles.includes(role)) {
+      return res.status(400).json({ message: "Role already assigned" });
+    }
+
+    user.roles.push(role);
+    await user.save();
+
+    res.json({ message: "Role added successfully", user });
+  } catch (err) {
+    res.status(500).json({ message: "Error adding role", error: err.message });
+  }
+});
+
+// Update an existing role for a user
+app.put("/updateRole", async (req, res) => {
+  const { userId, oldRole, newRole } = req.body;
+
+  try {
+    const user = await EmployeeModel.findById(userId);
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    // Find the index of the old role
+    const roleIndex = user.roles.indexOf(oldRole);
+    if (roleIndex === -1) {
+      return res.status(404).json({ message: "Role not found" });
+    }
+
+    // Update the role
+    user.roles[roleIndex] = newRole;
+    await user.save();
+
+    res.json({ message: "Role updated successfully", user });
   } catch (err) {
     res.status(500).json(err);
   }
 });
 
+// Delete a role from a user
+app.delete("/deleteRole", async (req, res) => {
+  const { userId, role } = req.body;
+
+  try {
+    const user = await EmployeeModel.findById(userId);
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    // Find the index of the role
+    const roleIndex = user.roles.indexOf(role);
+    if (roleIndex === -1) {
+      return res.status(404).json({ message: "Role not found" });
+    }
+
+    // Remove the role
+    user.roles.splice(roleIndex, 1);
+    await user.save();
+
+    res.json({ message: "Role deleted successfully", user });
+  } catch (err) {
+    res.status(500).json({ message: "Error deleting role", error: err });
+  }
+});
+
+// Permissions
+
+// Get users For permission and userstab
+app.get("/userstab", async (req, res) => {
+  try {
+    const userList = await EmployeeModel.find().select(
+      "name email permissions roles"
+    );
+    res.json(userList);
+  } catch (err) {
+    console.log(err);
+  }
+});
+
+app.post("/addPermission", async (req, res) => {
+  const { userId, permission } = req.body;
+
+  try {
+    const user = await EmployeeModel.findById(userId);
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    if (user.permissions.includes(permission)) {
+      return res.status(400).json({ message: "Permission already assigned" });
+    }
+
+    user.permissions.push(permission);
+    await user.save();
+
+    res.json({ message: "Permission added successfully", user });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+app.put("/updatePermission", async (req, res) => {
+  const { userId, oldPermission, newPermission } = req.body;
+
+  try {
+    const user = await EmployeeModel.findById(userId);
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    const permissionIndex = user.permissions.indexOf(oldPermission);
+    if (permissionIndex === -1) {
+      return res.status(404).json({ message: "Permission not found" });
+    }
+
+    user.permissions[permissionIndex] = newPermission;
+    await user.save();
+
+    res.json({ message: "Permission updated successfully", user });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+app.delete("/deletePermission", async (req, res) => {
+  const { userId, permission } = req.body;
+
+  try {
+    const user = await EmployeeModel.findById(userId);
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    const permissionIndex = user.permissions.indexOf(permission);
+    if (permissionIndex === -1) {
+      return res.status(404).json({ message: "Permission not found" });
+    }
+
+    user.permissions.splice(permissionIndex, 1);
+    await user.save();
+
+    res.json({ message: "Permission deleted successfully", user });
+  } catch (err) {
+    res.status(500).json({ message: "Error deleting permission", error: err });
+  }
+});
 
 app.listen(3001, () => {
   console.log("Server is running");

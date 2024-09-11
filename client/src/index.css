@@ -9,129 +9,12 @@ html {
   color: black;
 }
 
-/* Roles Component Styling */
-.roles-container {
-  width: 25rem;
-  min-height: 20rem;
-  background-color: white;
-  border-radius: 8px;
+.loggedUser {
+  width: 20rem;
   margin: 0 auto;
-  margin-top: 5rem;
-  padding: 5px 0px;
-}
-
-.role-input {
-  text-align: center;
-}
-
-.role-input > input {
-  border-radius: 4px;
-  border: 1px solid grey;
-  padding: 2px 0px 4px 6px;
-}
-
-.role-input button {
-  padding: 4px 20px;
-  border: none;
-  margin-left: 5px;
-  margin-bottom: 2px;
-  border-radius: 4px;
   background-color: #1f8ef1;
-}
-
-.role-input button:hover {
-  background-color: lightgray;
-}
-
-.roles-display {
-  margin-top: 1rem;
-}
-
-.roles-display ul {
-  display: flex;
-  justify-content: space-between;
-}
-
-.roles-display ul li {
-  list-style: circle;
-  margin-left: 1rem;
-}
-
-.roles-display button {
-  margin-right: 0.5rem;
-  padding: 0px 15px;
-  border: none;
   border-radius: 4px;
-  background-color: #1f8ef1;
 }
-
-.roles-display button:hover {
-  background-color: lightgray;
-}
-
-/* Permissions */
-
-/* .permissions-main {
-  width: 45rem;
-  min-height:20rem;
-  background-color: #27293d;
-  color: lightgrey;
-  border-radius: 8px;
-  margin: 0 auto;
-  margin-top: 5rem;
-  padding: 20px;
-}
-
-.permission-allContent{
-  display: flex;
-}
-
-
-.permission-input {
-  text-align: center;
-}
-
-.permission-input > input {
-  border-radius: 4px;
-  border: 1px solid grey;
-  padding: 2px 0px 4px 6px;
-}
-
-.permission-input button {
-  padding: 4px 20px;
-  border: none;
-  margin-left: 5px;
-  margin-bottom: 2px;
-  border-radius: 4px;
-  background-color: #1f8ef1;
-}
-
-.permission-input button:hover {
-  background-color: lightgray;
-}
-
-.permissions-display {
-  margin-top: 1rem;
-}
-
-.permissions-display ul {
-  display: flex;
-}
-
-.permissions-display ul li {
-}
-
-.permissions-display button {
-  margin-right: 0.5rem;
-  padding: 0px 15px;
-  border: none;
-  border-radius: 4px;
-  background-color: #1f8ef1;
-}
-
-.permissions-display button:hover {
-  background-color: lightgrpermissions;
-} */
 
 /* Sidebar */
 
@@ -154,19 +37,19 @@ html {
   width: 200px;
 }
 
-#mySidenav ul li h5{
+#mySidenav ul li h5 {
   color: white;
 }
 
-#mySidenav ul li h5{
+#mySidenav ul li h5 {
   display: none;
 }
 
-#mySidenav:hover ul li h5{
+#mySidenav:hover ul li h5 {
   display: block;
 }
 
-.error-div{
+.error-div {
   width: 180px;
   padding: 5px 5px 6px 5px;
   position: absolute;
@@ -174,57 +57,275 @@ html {
   left: 39%;
 }
 
-
-
-
-/* asdasd */
-
-.permissions-main {
-  padding: 20px;
+/* Roles Component Styling */
+.roles-main {
+  width: 70vw;
+  min-height: 50vh;
+  background-color: #27293d;
+  margin: 0 auto;
+  margin-top: 8rem;
+  color: lightgray;
+  border-radius: 8px;
 }
 
-.permissions-container {
-  max-width: 800px;
+.roles-header {
+  padding: 15px 0px;
+  padding-left: 1.2rem;
+  font-size: 18px;
+  font-weight: 600;
+  transform: scaleY(0.95);
+}
+
+.role-content-display {
+  border-top: 1px solid grey;
+  font-weight: 400;
+  padding-left: 1rem;
+}
+
+.role-content-display .role-list {
+  width: 15rem;
+  display: flex;
+  justify-content: space-between;
+  border-radius: 4px;
+  background-color: #1f8ef1;
+  padding: 3px 10px;
+  margin-top: 3px;
+}
+
+.addRole-icon {
+  font-size: 20px;
+  padding: 15px 40px;
+  cursor: pointer;
+}
+
+/* Role's Modal */
+.modal-role {
+  width: 35rem;
+  height: auto;
+  background-color: #1e1e2c;
+  border-radius: 8px;
+  border: 1px solid #1f8ef1;
+  position: absolute;
+  left: 31%;
+  top: 30%;
+  padding: 20px 10px;
+}
+
+.modal-heading {
+  padding: 0px 10px;
+  padding-top: 3px;
+  font-size: 1.5rem;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.modal-header .role-modal-close {
+  font-size: 1.8rem;
+  padding: 0px 1rem;
+  cursor: pointer;
+}
+
+.modal-role .modal-content {
+  margin-top: 2rem;
+}
+
+.modal-role .modal-content .modal-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 20px 10px;
+}
+
+.modal-role .modal-content .user-role {
+  display: flex;
+  padding: 0px 10px;
+}
+
+.modal-container h5 {
+  padding-top: 4px;
+}
+
+.modal-role .modal-container input {
+  width: 390px;
+  padding: 6px 10px;
+  border-radius: 6px;
+}
+
+.modal-role .modal-container input:focus {
+  outline: none;
+}
+
+.modal-role .modal-save-role {
+  width: 100px;
   margin: 0 auto;
 }
 
-.permission-input {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 20px;
+.modal-role .modal-save-role button {
+  padding: 3px 30px;
+  border-radius: 4px;
+  background-color: #1f8ef1;
 }
 
-.permission-input input {
-  margin-right: 10px;
-  padding: 5px;
-}
-
-.permission-input button {
-  padding: 5px 10px;
-}
-
-.permission-allContent {
-  margin-top: 20px;
-}
-
-.grid-container {
-  display: flex;
-  flex-direction: column; 
-}
-
-.grid-header {
+.modal-role .modal-save-role button:hover {
   background-color: white;
-  display: flex;
-  align-items: center; 
-  font-weight: bold;
-  border-bottom: 2px solid #ccc;
-  padding: 10px;
 }
 
+/* Permissions */
 
-.grid-item {
+.permissions-main {
+  width: 70vw;
+  min-height: 50vh;
+  background-color: #27293d;
+  margin: 0 auto;
+  margin-top: 8rem;
+  color: lightgray;
+  border-radius: 8px;
+}
+
+.permissions-header {
+  padding: 12px 0px;
+  padding-left: 1.2rem;
+  font-size: 18px;
+  font-weight: 600;
+  transform: scaleY(0.95);
+}
+
+.permission-content-display {
+  border-top: 1px solid grey;
+  font-weight: 400;
+  padding-left: 1rem;
+}
+
+.permission-content-display .permission-list {
+  width: 10rem;
+  display: flex;
+  justify-content: space-between;
+  border-radius: 4px;
+  background-color: #1f8ef1;
+  padding: 3px 10px;
+  margin-top: 3px;
+}
+
+.permission-content-display .permission-list .permission-list-item {
+  width: 90px;
+  overflow: hidden;
+}
+
+.addPermission-icon {
+  font-size: 20px;
+  padding: 15px 40px;
+  cursor: pointer;
+}
+
+/* Permission's Modal */
+.modal-permission {
+  width: 35rem;
+  height: auto;
+  background-color: #1e1e2c;
+  border-radius: 8px;
+  border: 1px solid #1f8ef1;
+  position: absolute;
+  left: 31%;
+  top: 30%;
+  padding: 20px 10px;
+}
+
+.modal-heading {
+  padding: 0px 10px;
+  padding-top: 3px;
+  font-size: 1.5rem;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.modal-header .permission-modal-close {
+  font-size: 1.8rem;
+  padding: 0px 1rem;
+  cursor: pointer;
+}
+
+.modal-permission .modal-content {
+  margin-top: 2rem;
+}
+
+.modal-permission .modal-content .modal-container {
   display: flex;
   align-items: center;
-  border-bottom: 1px solid #ccc;
+  gap: 10px;
+  margin: 20px 10px;
 }
 
+.modal-permission .modal-content .user-permission {
+  display: flex;
+  padding: 0px 10px;
+}
+
+.modal-container h5 {
+  padding-top: 4px;
+}
+
+.modal-permission .modal-container input {
+  width: 390px;
+  padding: 6px 10px;
+  border-radius: 6px;
+}
+
+.modal-permission .modal-container input:focus {
+  outline: none;
+}
+
+.modal-permission .modal-save-permission {
+  width: 100px;
+  margin: 0 auto;
+}
+
+.modal-permission .modal-save-permission button {
+  padding: 3px 30px;
+  border-radius: 4px;
+  background-color: #1f8ef1;
+}
+
+.modal-permission .modal-save-permission button:hover {
+  background-color: white;
+}
+
+/* Users Styling */
+
+.usertab-main {
+  width: 50vw;
+  min-height: 50vh;
+  background-color: #27293d;
+  margin: 0 auto;
+  margin-top: 8rem;
+  color: lightgray;
+  border-radius: 8px;
+}
+
+.user-heading,
+.email-heading {
+  padding: 12px 0px;
+  padding-left: 3.3rem;
+  font-size: 18px;
+  font-weight: 600;
+  transform: scaleY(0.95);
+}
+
+.email-heading {
+  padding-left: 1.9rem;
+}
+
+.user-content-display {
+  border-top: 1px solid grey;
+  font-weight: 400;
+  padding-left: 1rem;
+}
+
+.user-content-display div li {
+  list-style: circle;
+}

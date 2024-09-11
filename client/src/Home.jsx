@@ -1,19 +1,22 @@
-import CalendarRouting from "./components/CalandarRouting"
-
-import React from 'react'
-import Sidebar from "./Sidebar"
-import { Link } from "react-router-dom"
+import CalendarRouting from "./components/CalandarRouting";
+import React from "react";
+import Sidebar from "./Sidebar";
+import Logout from "./Logout";
 
 export default function Home() {
+  const username = localStorage.getItem("name");
   return (
     <>
-      <div><Link to="/" style={{ padding: "8px 15px", textDecoration: "none", backgroundColor: "#1f8ef1", color: "white", borderRadius: "4px", position: "absolute", right: "5%", top: "3%" }}>Logout</Link></div>
-      <div>
-        <Sidebar />
+      <div style={{ marginTop: "2.3rem" }}>
+        <div className="loggedUser">
+          <h2 style={{ textAlign: "center" }}>Welcome {username}!</h2>
+        </div>
+        <Logout />
       </div>
       <div>
+        <Sidebar />
         <CalendarRouting />
       </div>
     </>
-  )
+  );
 }
