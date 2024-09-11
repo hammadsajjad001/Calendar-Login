@@ -9,6 +9,15 @@ html {
   color: black;
 }
 
+::-webkit-scrollbar {
+  width: 5px;
+  height: 10px;
+}
+::-webkit-scrollbar-thumb {
+  border-radius: 8px;
+  background: rgb(141, 139, 139);
+}
+
 .loggedUser {
   width: 20rem;
   margin: 0 auto;
@@ -18,7 +27,7 @@ html {
 
 /* Sidebar */
 
-#mySidenav {
+/* #mySidenav {
   position: absolute;
   left: -80px;
   transition: 0.3s;
@@ -35,7 +44,7 @@ html {
 #mySidenav:hover {
   left: 0;
   width: 200px;
-}
+} */
 
 #mySidenav ul li h5 {
   color: white;
