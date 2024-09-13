@@ -1,148 +1,136 @@
-/* SIDE-BAR Styling  */
-/* 
 .sidebar {
+  width: 5.3rem;
+  height: 83vh;
+  background: #1e8af8;
   position: absolute;
-  left: -80px;
-  transition: 0.3s;
-  padding: 15px;
-  width: 150px;
-  height: 80vh;
-  text-decoration: none;
-  font-size: 20px;
-  color: white;
-  border-radius: 0 5px 5px 0;
-  background-color: #1f8ef1;
-  overflow-y: hidden;
-}
-
-.sidebar:hover {
+  top: 10%;
   left: 0;
-  width: 200px;
-  overflow-y: scroll;
-  overflow-x: hidden;
-} */
-
-/* SIDE-BAR Styling  */
-.sidebar {
-  top: 13.3%;
-  position: absolute;
-  transition: 0.5s;
-  padding: 15px;
-  width: 80px;
-  height: 80vh;
-  text-decoration: none;
-  font-size: 20px;
-  color: white;
-  border-radius: 0 5px 5px 0;
-  background-color: #1f8ef1;
-  overflow: hidden;
-  margin-left: 20px;
+  padding-top: 18px;
+  transition: width 0.3s;
+  border-radius: 8px;
   z-index: 1;
+  margin-top: 2.3rem;
+  margin-left: 1.3rem;
+  padding-left: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 }
 
-.sidebar:hover {
-  left: 0;
+.sidebar.expanded {
   width: 250px;
   overflow-y: scroll;
-  overflow-x: hidden;
 }
 
 .sidebar-header {
   display: flex;
-  align-items: center;
-  gap: 10px;
+  gap: 13px;
+  margin: 15px 10px 5px 0px;
+  padding-bottom: 15px;
 }
 
-.react-icon {
-  font-size: 30px;
-  background: #1e1e2f;
+.sidebar-header h5 {
+  font-size: 14px;
+  font-weight: light;
+  letter-spacing: 0.5px;
+  padding-top: 5px;
+}
+
+.sidebar-header .react-icon {
+  color: #4fa4f8;
+  font-size: 35px;
+  background-color: #1e1e2f;
   border-radius: 50%;
-  padding: 5px;
+  padding: 6px 3px;
 }
 
-/* hide content */
-.sidebar:not(:hover) .sidebar-header h5 {
-  display: none;
+.sidebar.sidebar.collapsed.sidebar-header.react-icon {
+  align-items: center;
 }
 
-.sidebar:not(:hover) .sidebar-header .react-icon {
-  margin-left: 9px;
-}
-
-.sidebar:not(:hover) .dropdown-ul li span {
-  display: none;
-}
-
-.sidebar:hover .dropdown-ul li span {
-  display: inline;
-}
-
-.sidebar:not(:hover) .dropdown-ul .caret {
-  display: none;
-}
-
-.sidebar:not(:hover) .dropdown-ul li .sidebar-icon {
-  text-align: center;
-  margin-left: 2px;
-}
-
-.dropdown-ul {
+.sidebar ul {
   list-style-type: none;
   padding: 0;
-  margin: 0;
-  margin-top: 2rem;
+  width: 100%;
 }
 
-.dropdown-ul li {
-  padding: 20px 10px;
+.sidebar ul li {
+  width: 100%;
+  display: flex;
   align-items: center;
-  cursor: pointer;
+  padding-left: 5px;
+  padding-top: 12px;
   position: relative;
+}
+.dropdown-ul li.active {
+  list-style: circle;
+}
+
+.dropdown-ul li.active::before {
+  content: "";
+  position: absolute;
+  left: -20%;
+  top: 62%;
+  transform: translateY(-50%);
+  width: 7px; /* Circle diameter */
+  height: 7px; /* Circle diameter */
+  background-color: white;
+  border-radius: 50%; /* Makes the element a circle */
+}
+
+.sidebar.expanded .dropdown-ul li.active::before {
+  content: "";
+  position: absolute;
+  left: -5%;
+  transform: translateY(-50%);
+  width: 7px; /* Circle diameter */
+  height: 7px; /* Circle diameter */
+  background-color: white;
+  border-radius: 50%; /* Makes the element a circle */
+}
+
+.sidebar ul li a {
+  color: white;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  font-weight: 200;
+  margin-bottom: 20px;
+  padding-top: 20px;
+}
+
+.sidebar ul li a span {
+  margin-left: 10px;
+  display: none;
   font-size: 12px;
 }
 
-.sidebar .dropdown-ul li .sidebar-icon {
-  font-size: 1.5rem;
+.sidebar.expanded ul li a span {
+  display: inline;
 }
 
-.dropdown-ul li a {
-  color: white;
-  padding: 10px;
-  align-items: center;
-  text-decoration: none;
+.sidebar ul li .sidebar-icon {
+  font-size: 2rem;
 }
 
-.dropdown-ul li .notdropdown {
-  margin: 0;
-}
-.dropdown-ul li span {
-  margin-left: 10px;
+.sidebar.expanded ul li .sidebar-icon {
+  font-size: 1.7rem;
 }
 
-.caret {
-  font-size: 14px;
-  position: absolute;
-  top: 26px;
-  right: 0px;
-  transition: transform 0.3s;
-}
+/* Media Queries */
 
-.dropdown {
-  list-style-type: none;
-  display: none;
-  overflow: hidden;
-  transition: max-height 0.3s ease;
-}
+@media (max-width: 768px) {
+  .sidebar {
+    left: -250px;
+  }
 
-.dropdown.active {
-  display: block;
-  padding-left: 10px;
-}
-
-.dropdown li {
-  font-size: 14px;
-}
-
-.sidebar:not(:hover) .dropdown li{
-  display: none;
+  .sidebar.open {
+    height: 100vh;
+    display: block;
+  }
+  .sidebar.expanded {
+    left: -20px;
+  }
 }

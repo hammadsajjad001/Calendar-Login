@@ -1,217 +1,207 @@
+// import React, { useState } from "react";
+// import { Link } from "react-router-dom";
+// import { FaReact } from "react-icons/fa";
+// import { HiOutlineChartPie } from "react-icons/hi2";
+// import { BsAlarm } from "react-icons/bs";
+// import { LuUser } from "react-icons/lu";
+// import { IoAccessibilityOutline } from "react-icons/io5";
+// import { SiPolywork } from "react-icons/si";
+// import "./sideBar.css";
+
+// const SideBar = ({ isOpen, toggleSidebar }) => {
+//   const [isExpanded, setIsExpanded] = useState(false);
+
+//   const handleMouseEnter = () => {
+//     if (!isExpanded) {
+//       setIsExpanded(true);
+//     }
+//   };
+
+//   const handleMouseLeave = () => {
+//     if (isExpanded) {
+//       setIsExpanded(false);
+//     }
+//   };
+
+//   const handleBarBtnClick = () => {
+//     setIsExpanded(!isExpanded);
+//     toggleSidebar(!isOpen);
+//   };
+
+//   return (
+//     <>
+//       <i className="bi bi-list-ul" style={{position:'absolute', top:'4.3%', left:'3.8%',fontSize:'1.6rem'}} onClick={handleBarBtnClick}></i>
+//       <div
+//         className={`sidebar ${isExpanded ? "expanded" : "collapsed"} ${isOpen ? "open" : ""}`}
+//         onMouseEnter={handleMouseEnter}
+//         onMouseLeave={handleMouseLeave}
+//       >
+//         <div className="sidebar-header">
+//           <FaReact className="react-icon" />
+//           {isExpanded && <h5>CREATIVE TIM</h5>}
+//         </div>
+//         <ul className="dropdown-ul">
+//           <li>
+//             <HiOutlineChartPie className="sidebar-icon" />
+//             <Link to="/home">
+//               <span className="notdropdown">Dashboard</span>
+//             </Link>
+//           </li>
+//           <li>
+//             <BsAlarm className="sidebar-icon" />
+//             <Link to="/calendar">
+//               <span className="notdropdown">Event Manager</span>
+//             </Link>
+//           </li>
+//           <li>
+//             <SiPolywork className="sidebar-icon" />
+//             <Link to="/roles">
+//               <span className="notdropdown">ROLES</span>
+//             </Link>
+//           </li>
+//           <li>
+//             <IoAccessibilityOutline className="sidebar-icon" />
+//             <Link to="/permissions">
+//               <span className="notdropdown">PERMISSIONS</span>
+//             </Link>
+//           </li>
+//           <li>
+//             <LuUser className="sidebar-icon" />
+//             <Link to="/usertab">
+//               <span className="notdropdown">USERS</span>
+//             </Link>
+//           </li>
+//         </ul>
+//       </div>
+//     </>
+//   );
+// };
+
+// export default SideBar;
+
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import { FaReact, FaCaretDown, FaCaretUp } from "react-icons/fa";
-import { PiImagesLight } from "react-icons/pi";
+import { Link, useLocation } from "react-router-dom";
+import { FaReact } from "react-icons/fa";
 import { HiOutlineChartPie } from "react-icons/hi2";
-import { TbHexagons } from "react-icons/tb";
-import { SiGoogleforms } from "react-icons/si";
-import { IoExtensionPuzzleOutline } from "react-icons/io5";
-import { BsPinAngle, BsAlarm } from "react-icons/bs";
-import { VscTools } from "react-icons/vsc";
-import { HiOutlineChartBar } from "react-icons/hi2";
+import { BsAlarm } from "react-icons/bs";
 import { LuUser } from "react-icons/lu";
 import { IoAccessibilityOutline } from "react-icons/io5";
 import { SiPolywork } from "react-icons/si";
-
 import "./sideBar.css";
 
-const SideBarComponent = () => {
-  const [activeDropdown, setActiveDropdown] = useState(null);
+const SideBar = ({ isOpen, toggleSidebar }) => {
+  const [isExpanded, setIsExpanded] = useState(false);
+  const [activeItem, setActiveItem] = useState("/home"); // Default active item
+  const location = useLocation(); // Get the current route location
+  const currentPath = location.pathname;
 
-  const handleToggle = (index) => {
-    setActiveDropdown(activeDropdown === index ? null : index);
+  // const getPageName = (path) => {
+  //   switch (path) {
+  //     case "/home":
+  //       return "Dashboard";
+  //     case "/calendar":
+  //       return "Event Manager";
+  //     case "/roles":
+  //       return "Roles";
+  //     case "/permissions":
+  //       return "Permissions";
+  //     case "/usertab":
+  //       return "Users";
+  //     default:
+  //       return "Home";
+  //   }
+  // };
+  // const pageName = getPageName(currentPath);
+
+  const handleMouseEnter = () => {
+    if (!isExpanded) {
+      setIsExpanded(true);
+    }
   };
 
-  return (
-    <div className="sidebar-main">
-    <div className="sidebar">
-      <div className="sidebar-header">
-        <FaReact className="react-icon" />
-        <h5>CREATIVE TIM</h5>
-      </div>
-      <ul className="dropdown-ul">
-        <li>
-          <HiOutlineChartPie className="sidebar-icon" />
-            <Link to="/home">
-            <span className="notdropdown">Dashboard</span>
-          </Link>
-        </li>
-        {/* Pages */}
-        <li onClick={() => handleToggle(1)}>
-          <PiImagesLight className="sidebar-icon"/>
-          <span>Pages</span>
-          {activeDropdown === 1 ? (
-            <FaCaretUp className="caret" />
-          ) : (
-            <FaCaretDown className="caret" />
-          )}
-          <ul className={`dropdown ${activeDropdown === 1 ? "active" : ""}`}>
-            <li>
-              <Link to="/pricing">Pricing</Link>
-            </li>
-            <li>
-              <Link to="/rtl-support">RTL Support</Link>
-            </li>
-            <li>
-              <Link to="/timeline">TimeLine</Link>
-            </li>
-            <li>
-              <Link to="/login">Login</Link>
-            </li>
-            <li>
-              <Link to="/register">Register</Link>
-            </li>
-            <li>
-              <Link to="/lock-screen">Lock Screen</Link>
-            </li>
-            <li>
-              <Link to="/user-profile">User Profile</Link>
-            </li>
-          </ul>
-        </li>
-        {/* Components */}
-        <li onClick={() => handleToggle(2)}>
-          <TbHexagons className="sidebar-icon"/>
-          <span>Components</span>
-          {activeDropdown === 2 ? (
-            <FaCaretUp className="caret" />
-          ) : (
-            <FaCaretDown className="caret" />
-          )}
-          <ul className={`dropdown ${activeDropdown === 2 ? "active" : ""}`}>
-            <li>
-              <Link to="/multi-level-collapse">MultiLevel Collapse</Link>
-            </li>
-            <li>
-              <Link to="/buttons">Buttons</Link>
-            </li>
-            <li>
-              <Link to="/grid-system">Grid System</Link>
-            </li>
-            <li>
-              <Link to="/panels">Panels</Link>
-            </li>
-            <li>
-              <Link to="/sweet-alert">Sweet Alert</Link>
-            </li>
-            <li>
-              <Link to="/notifications">Notifications</Link>
-            </li>
-            <li>
-              <Link to="/icons">Icons</Link>
-            </li>
-            <li>
-              <Link to="/typography">Typography</Link>
-            </li>
-          </ul>
-        </li>
-        {/* Forms */}
-        <li onClick={() => handleToggle(3)}>
-          <SiGoogleforms className="sidebar-icon"/>
-          <span>Forms</span>
-          {activeDropdown === 3 ? (
-            <FaCaretUp className="caret" />
-          ) : (
-            <FaCaretDown className="caret" />
-          )}
-          <ul className={`dropdown ${activeDropdown === 3 ? "active" : ""}`}>
-            <li>
-              <Link to="/regular-forms">Regular Forms</Link>
-            </li>
-            <li>
-              <Link to="/extended-forms">Extended Forms</Link>
-            </li>
-            <li>
-              <Link to="/validation-forms">Validation Forms</Link>
-            </li>
-            <li>
-              <Link to="/wizard">Wizard</Link>
-            </li>
-          </ul>
-        </li>
-        {/* Tables */}
-        <li onClick={() => handleToggle(4)}>
-          <IoExtensionPuzzleOutline className="sidebar-icon"/>
-          <span>Tables</span>
-          {activeDropdown === 4 ? (
-            <FaCaretUp className="caret" />
-          ) : (
-            <FaCaretDown className="caret" />
-          )}
-          <ul className={`dropdown ${activeDropdown === 4 ? "active" : ""}`}>
-            <li>
-              <Link to="/regular-tables">Regular Tables</Link>
-            </li>
-            <li>
-              <Link to="/extended-tables">Extended Tables</Link>
-            </li>
-            <li>
-              <Link to="/react-tables">React Tables</Link>
-            </li>
-          </ul>
-        </li>
-        {/* Maps */}
-        <li onClick={() => handleToggle(5)}>
-          <BsPinAngle className="sidebar-icon"/>
-          <span>Maps</span>
-          {activeDropdown === 5 ? (
-            <FaCaretUp className="caret" />
-          ) : (
-            <FaCaretDown className="caret" />
-          )}
-          <ul className={`dropdown ${activeDropdown === 5 ? "active" : ""}`}>
-            <li>
-              <Link to="/google-maps">Google Maps</Link>
-            </li>
-            <li>
-              <Link to="/full-screen-map">Full Screen Map</Link>
-            </li>
-            <li>
-              <Link to="/vector-map">Vector Map</Link>
-            </li>
-          </ul>
-        </li>
-        <li>
-          <VscTools className="sidebar-icon"/>
+  const handleMouseLeave = () => {
+    if (isExpanded) {
+      setIsExpanded(false);
+    }
+  };
 
-          <Link to="/widgets">
-            <span className="notdropdown">WIDGETS</span>
-          </Link>
-        </li>
-        <li>
-          <HiOutlineChartBar className="sidebar-icon"/>
-          <Link to="/charts">
-            <span className="notdropdown">CHARTS</span>
-          </Link>
-        </li>
-        <li>
-          <BsAlarm className="sidebar-icon"/>
-          <Link to="/calendar">
-            <span className="notdropdown">CALENDAR</span>
-          </Link>
-        </li>
-        <li>
-          <SiPolywork className="sidebar-icon"/>
-          <Link to="/roles">
-            <span className="notdropdown">ROLES</span>
-          </Link>
-        </li>
-        <li>
-          <IoAccessibilityOutline className="sidebar-icon"/>
-          <Link to="/permissions">
-            <span className="notdropdown">PERMISSIONS</span>
-          </Link>
-        </li>
-        <li>
-          <LuUser className="sidebar-icon"/>
-          <Link to="/usertab">
-            <span className="notdropdown">USERS</span>
-          </Link>
-        </li>
-      </ul>
-    </div>
-    </div>
+  const handleBarBtnClick = () => {
+    setIsExpanded(!isExpanded);
+    toggleSidebar(!isOpen);
+  };
+
+  const handleItemClick = (path) => {
+    setActiveItem(path);
+  };
+
+  const menuItems = [
+    {
+      path: "/home",
+      icon: <HiOutlineChartPie className="sidebar-icon" />,
+      label: "DASHBOARD",
+    },
+    {
+      path: "/calendar",
+      icon: <BsAlarm className="sidebar-icon" />,
+      label: "EVENT MANAGER",
+    },
+    {
+      path: "/roles",
+      icon: <SiPolywork className="sidebar-icon" />,
+      label: "ROLES",
+    },
+    {
+      path: "/permissions",
+      icon: <IoAccessibilityOutline className="sidebar-icon" />,
+      label: "PERMISSIONS",
+    },
+    {
+      path: "/usertab",
+      icon: <LuUser className="sidebar-icon" />,
+      label: "USERS",
+    },
+  ];
+
+  return (
+    <>
+      <i
+        className="bi bi-list-ul"
+        style={{
+          position: "absolute",
+          top: "4.3%",
+          left: "3.8%",
+          fontSize: "1.6rem",
+        }}
+        onClick={handleBarBtnClick}
+      ></i>
+      <div
+        className={`sidebar ${isExpanded ? "expanded" : "collapsed"} ${
+          isOpen ? "open" : ""
+        }`}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+      >
+        <div className="sidebar-header">
+          <FaReact className="react-icon" />
+          {isExpanded && <h5>CREATIVE TIM</h5>}
+        </div>
+        <ul className="dropdown-ul">
+          {menuItems.map((item) => (
+            <li
+              key={item.path}
+              className={activeItem === item.path ? "active" : ""}
+              onClick={() => handleItemClick(item.path)}
+            >
+              {item.icon}
+              <Link to={item.path}>
+                <span className="notdropdown">{item.label}</span>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </>
   );
 };
 
-export default SideBarComponent;
+export default SideBar;
